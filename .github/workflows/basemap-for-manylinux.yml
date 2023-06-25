@@ -21,7 +21,7 @@ on:
 jobs:
 
   checkout:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       -
         name: Checkout
@@ -34,7 +34,7 @@ jobs:
           path: .
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         python-version:
@@ -83,7 +83,7 @@ jobs:
       max-parallel: 2
       fail-fast: false
     needs: lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: "pylegacy/${{ matrix.arch }}-python:3.6-debian-4"
     steps:
       -
@@ -134,7 +134,7 @@ jobs:
       max-parallel: 3
       fail-fast: false
     needs: build-geos
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: "pylegacy/${{ matrix.arch }}-python:${{ matrix.python-version }}-debian-4"
     steps:
       -
@@ -208,7 +208,7 @@ jobs:
       max-parallel: 3
       fail-fast: false
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: "pylegacy/${{ matrix.arch }}-python:3.6-debian-8"
     steps:
       -
@@ -257,7 +257,7 @@ jobs:
       max-parallel: 3
       fail-fast: false
     needs: repair
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: "pylegacy/${{ matrix.arch }}-python:${{ matrix.python-version }}-debian-8"
     steps:
       -
@@ -303,7 +303,7 @@ jobs:
       max-parallel: 1
     if: startsWith(github.event.ref, 'refs/tags/v')
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     container: "pylegacy/${{ matrix.arch }}-python:${{ matrix.python-version }}-debian-8"
     environment: PyPI
     steps:
